@@ -30,14 +30,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libtss2-dev libssl-dev pkg-config
 
-      - name: Check cargo
-        run: cargo check --release
-
       - name: Check formatting
         run: cargo fmt --all -- --check
 
       - name: Run linter
         run: cargo clippy -- -D warnings
+
+      - name: Check cargo
+        run: cargo check --release
 
       - name: Build release
         run: cargo build --release
