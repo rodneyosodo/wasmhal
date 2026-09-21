@@ -20,9 +20,21 @@ fn main() {
             match serde_json::from_slice::<serde_json::Value>(&evidence) {
                 Ok(v) => {
                     println!("version: {}", v["version"]);
-                    println!("pcrs: {}", v["tpm_quote"]["pcrs"].as_array().map(|a| a.len()).unwrap_or(0));
-                    println!("hcl_report bytes: {}", v["hcl_report"].as_array().map(|a| a.len()).unwrap_or(0));
-                    println!("vcek present: {}", v["vcek"].as_str().map(|s| !s.is_empty()).unwrap_or(false));
+                    println!(
+                        "pcrs: {}",
+                        v["tpm_quote"]["pcrs"]
+                            .as_array()
+                            .map(|a| a.len())
+                            .unwrap_or(0)
+                    );
+                    println!(
+                        "hcl_report bytes: {}",
+                        v["hcl_report"].as_array().map(|a| a.len()).unwrap_or(0)
+                    );
+                    println!(
+                        "vcek present: {}",
+                        v["vcek"].as_str().map(|s| !s.is_empty()).unwrap_or(false)
+                    );
                     let sig = v["tpm_quote"]["signature"].as_str().unwrap_or("");
                     println!("signature hex len: {}", sig.len());
                 }
